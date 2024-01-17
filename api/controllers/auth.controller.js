@@ -1,14 +1,15 @@
 import User from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
+import { errorHandler } from "../utils/error.js";
 
-const signUp = async (req, res) => {
+const signUp = async (req, res, next) => {
   const { username, email, password } = req.body;
 
   try {
     //check if email exists
     const userFound = await User.findOne({ email });
     if (userFound) {
-      return res.status(400).json({ message: "User already exists" });
+      return next(errorHandler(400, "User already exists"));
     }
 
     const hashedPassword = bcryptjs.hashSync(password, 10);
@@ -26,7 +27,7 @@ const signUp = async (req, res) => {
       data: newUser,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 };
 export { signUp };
