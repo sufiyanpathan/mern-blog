@@ -10,7 +10,7 @@ function Header() {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const { theme } = useSelector((state) => state.theme);
-
+  const profilePic = currentUser?.profilePicture + "?" + new Date().getTime();
   return (
     <Navbar className="border-b-2">
       <Link
@@ -50,9 +50,7 @@ function Header() {
           <Dropdown
             arrowIcon={false}
             inline
-            label={
-              <Avatar alt="user" img={currentUser.profilePicture} rounded />
-            }
+            label={<Avatar alt="user" img={profilePic} rounded />}
           >
             <Dropdown.Header>
               <span className="block text-sm"></span>
