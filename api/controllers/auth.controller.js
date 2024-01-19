@@ -59,7 +59,7 @@ const signIn = async (req, res, next) => {
 
     res
       .status(200)
-      .cookie("access-token", token, {
+      .cookie("access_token", token, {
         httpOnly: true,
       })
       .json(userWithoutPassword);
@@ -84,7 +84,7 @@ const signInWithGoogle = async (req, res, next) => {
 
       res
         .status(200)
-        .cookie("access-token", token, {
+        .cookie("access_token", token, {
           httpOnly: true,
         })
         .json(userWithoutPassword);
@@ -114,7 +114,7 @@ const signInWithGoogle = async (req, res, next) => {
 
       res
         .status(200)
-        .cookie("access-token", token, {
+        .cookie("access_token", token, {
           httpOnly: true,
         })
         .json(userWithoutPassword);
