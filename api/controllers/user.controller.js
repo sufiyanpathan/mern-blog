@@ -10,7 +10,6 @@ export const updateUser = async (req, res, next) => {
 
     if (req.body.password) {
       if (req.body.password.length < 6) {
-        console.log("passss", req.body.password);
         return next(
           errorHandler(400, "Password must be at least 6 characters")
         );
