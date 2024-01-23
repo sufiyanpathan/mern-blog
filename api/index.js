@@ -6,6 +6,7 @@ import authRouter from "./routes/auth.route.js";
 import { globalErrHandler } from "./middlewares/globalErrHandler.js";
 import { pageNotFound } from "./middlewares/pageNotFound.js";
 import cookieParser from "cookie-parser";
+import postRouter from "./routes/post.route.js";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.listen(PORT, () => {
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/post", postRouter);
 
 //-------------Error handle middleware------------//
 app.use(globalErrHandler);
