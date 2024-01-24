@@ -89,3 +89,33 @@ export const deletepost = async (req, res, next) => {
     next(error);
   }
 };
+
+export const updatepost = async (req, res, next) => {
+  console.log(req.params);
+  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+    return next(errorHandler(403, "You are not allowed to update this post"));
+  }
+  try {
+    const lowercased = req.body.title.toLowerCase();
+
+    // Remove special characters, replace spaces with a single hyphen
+    const cleanedSlug = lowercased.replace(/[^\w\s]/g, "").replace(/\s+/g, "-");
+    const updatedPost = await Post.findByIdAndUpdate(
+      req.params.postId,
+      {
+        $set: {
+          title: req.body.title,
+          content: req.body.content,
+          category: req.body.category,
+          image: req.body.image,
+          slug: cleanedSlug,
+        },
+      },
+      { new: true }
+    );
+    console.log(updatedPost);
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    next(error);
+  }
+};
