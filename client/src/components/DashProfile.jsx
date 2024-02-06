@@ -158,6 +158,7 @@ export default function DashProfile() {
       dispatch(deleteUserFailure(error.message));
     }
   };
+
   const handleSignedOut = async () => {
     try {
       const res = await fetch("/api/user/sign-out", {
@@ -173,6 +174,7 @@ export default function DashProfile() {
       console.log(error.message);
     }
   };
+
   return (
     <div className="max-w-lg mx-auto p-3 w-full">
       <h1 className="my-7 text-center font-semibold text-3xl">Profile</h1>
